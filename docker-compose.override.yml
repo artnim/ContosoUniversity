@@ -6,3 +6,15 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "5432"
+    environment:
+      - POSTGRES_USER=contosouniversity
+      - POSTGRES_PASSWORD=contosouniversity
+      - POSTGRES_DB=contosouniversity
+    volumes:
+      - /srv/docker/contosouniversitypostgresql:/var/lib/postgresql
