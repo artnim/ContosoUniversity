@@ -5,9 +5,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "80"
+      - "5001:80"
     depends_on:
       - db
+    networks:
+      - contosonet
   db:
     image: postgres
     ports:
@@ -17,4 +19,11 @@ services:
       - POSTGRES_PASSWORD=contosouniversity
       - POSTGRES_DB=contosouniversity
     volumes:
-      - /srv/docker/contosouniversitypostgresql:/var/lib/postgresql
+      - contosopg:/var/lib/postgresql
+    networks:
+      - contosonet
+volumes:
+  contosopg:
+    driver: local
+networks:
+  contosonet:
